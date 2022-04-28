@@ -1,10 +1,15 @@
 pipeline {
-    agent { 
-        node {
-             label 'master' 
-        }
+    agent any
+    tools {
+        maven 'Maven 3.3.9'
+        jdk 'jdk8'
     }
     stages{
+            stage ('Build') {
+                steps {
+                    sh 'mvn -Dmaven.test.failure.ignore=true install' 
+                }
+            }
             stage('Checkout') {
                 steps {
                     git url: 'https://github.com/adeomobs/liquibase-maven.git', credentialsId: 'thegit_main_log', branch: 'master'
