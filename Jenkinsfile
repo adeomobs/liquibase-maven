@@ -1,22 +1,11 @@
 pipeline {
-    agent any
-    tools {
-        maven 'Maven 3.8.5'
+    agent {
+        docker { image 'liquibase/liquibase:4.4.2' }
     }
     stages{
-            stage ('Build') {
+            stage('test') {
                 steps {
-                    sh 'mvn -Dmaven.test.failure.ignore=true install' 
-                }
-            }
-            stage('Checkout') {
-                steps {
-                    git url: 'https://github.com/adeomobs/liquibase-maven.git', credentialsId: 'thegit_main_log', branch: 'master'
-                }
-            }
-            stage('Update') {
-                steps {
-                    sh 'mvn --file pom.xml liquibase:update -Dliquibase.changeLogFile=src/main/script/changelog-master.xml -Dliquibase.propertyFile=src/main/resources/liquibase.properties'
+                    sh 'liquibase -version'
                 }
             }
      }
