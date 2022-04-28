@@ -12,7 +12,7 @@ pipeline {
             }
             stage('Update') {
                 steps {
-                    liquibaseUpdate changeLogFile: 'src/main/script/changelog-master.xml', databaseEngine: 'MySQL'
+                    mvn --file pom.xml liquibase:update -Dliquibase.changeLogFile=src/main/script/changelog-master.xml -Dliquibase.propertyFile=src/main/resources/liquibase.properties
                 }
             }
      }
