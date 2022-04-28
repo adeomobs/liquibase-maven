@@ -4,17 +4,18 @@ pipeline {
     }
     
     environment {
-        DB_Creds=credentials('db_credentials')
+        PostgresDB_Creds=credentials('PGdb_credentials')
     }
+    
     stages{
         stage('Status') {
             steps {
-                sh 'liquibase status --url = "jdbc:mysql://localhost:3306/liquibase"'
+                sh 'liquibase status --url = "jdbc:mysql://localhost:3306/liquibase" --changeLogFile=src/main/script/changelog-master.xml --liquibasePropertiesPath=src/main/resources/liquibase.properties'
             }
         }
         stage('Update') {
             steps {
-                sh 'liquibase update --url = "jdbc:mysql://localhost:3306/liquibase"'
+                sh 'liquibase update --url = "jdbc:mysql://localhost:3306/liquibase" --changeLogFile=src/main/script/changelog-master.xml --liquibasePropertiesPath=src/main/resources/liquibase.properties'
             }
         }
         
