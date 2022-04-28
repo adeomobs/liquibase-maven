@@ -6,7 +6,7 @@ pipeline {
     }
     stages{
             stage('Checkout') {
-                git url: 'https://github.com/adeomobs/liquibase-maven.git', credentialsId: 'adeomobs', branch: 'master'
+                git url: 'https://github.com/adeomobs/liquibase-maven.git', credentialsId: 'thegit_main_log', branch: 'master'
             }
             stage('Update') {
                 steps {
