@@ -1,5 +1,8 @@
 pipeline {
-    agent { node {}
+    agent { 
+        node {
+             label 'my-maven test' 
+        }
     }
     stages{
             stage('Update') {
