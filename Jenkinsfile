@@ -17,7 +17,7 @@ pipeline {
             }
             stage('Update') {
                 steps {
-                    mvn --file pom.xml liquibase:update -Dliquibase.propertyFile=src/main/resources/liquibase.properties
+                    sh 'mvn --file pom.xml liquibase:update -Dliquibase.changeLogFile=src/main/script/changelog-master.xml -Dliquibase.propertyFile=src/main/resources/liquibase.properties'
                 }
             }
      }
